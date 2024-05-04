@@ -205,7 +205,11 @@ elif selected=="Contact Us":
 
     with coll1: 
         st.subheader('Dhanraj Shetty:sunglasses:')
-        st.caption('Mobile:- 9867335173, E-Mail - sounushetty56@gmail.com')
+        st.caption('Mobile:- 9867335173')
+        st.caption('E-Mail - sounushetty56@gmail.com')
+        st.caption('GITHUB: https://github.com/DhanrajShetty56')
+        st.caption('LINKEDIN: https://www.linkedin.com/in/dhanraj-shetty-03a004217/')
+
 
         st.caption(":red[Note: * fill all mandatory fields]")     
         Name = st.text_input("Name*")
