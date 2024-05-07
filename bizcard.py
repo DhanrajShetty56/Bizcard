@@ -1,3 +1,5 @@
+# =====================================================   /   /   Import library   /   /   ================================================= #
+
 import streamlit as st
 from streamlit_option_menu import option_menu
 import easyocr
@@ -8,6 +10,8 @@ import re
 import time
 import psycopg2
 
+# ==========================================   /   /   Data Extraction and upload zone   /   /   ============================================== #
+
 def image_to_text(path):
     input_pic=Image.open(path)
     img_array=np.array(input_pic)
@@ -15,6 +19,8 @@ def image_to_text(path):
     reader=easyocr.Reader(['en'])
     text=reader.readtext(img_array,detail=0)
     return text
+
+ # ----------------------------    /     Data processing and converted into data frame   /   ------------------ #
 
 def extract_text(texts):
     extract_dic = {
@@ -55,6 +61,8 @@ def extract_text(texts):
             
     return extract_dic
 
+# =====================================================   /   /   Dash board   /   /   ================================================= #
+
 
 st.set_page_config(layout="wide")
 
@@ -78,7 +86,9 @@ if selected=="Upload Image":
             st.dataframe(df)
             
         button1=st.button(":red[Save Text]",use_container_width=True)
-        
+
+ # ==========================================   /   /   SQL connection  /   /   ============================================== #
+       
         if button1:            
             mydb = psycopg2.connect(host="localhost",
                 user="postgres", password="9867335172$Ss",
@@ -100,7 +110,10 @@ if selected=="Upload Image":
             cursor.executemany(insert_data, data)
             mydb.commit()
             st.success("Above the Text data Inserted Successfully")
-            
+
+ # --------------------------------------   /   View & Modify  /   --------------------------------------- #
+
+
 elif selected=="View & Modify":                 
     selected_option = st.selectbox("View or Modify options", ["Select Below Options", "Preview text", "Modify text"])
     if selected_option == "Select Below Options":
@@ -175,7 +188,10 @@ elif selected=="View & Modify":
                         cursor.executemany(insert_data, data)
                         mydb.commit()
                         st.success("Above the Text data Modify Successfully")
-                        
+
+# --------------------------------------   /   Delete option    /   --------------------------------------- #
+
+
 elif selected == "Delete": 
     mydb = psycopg2.connect(host="localhost", user="postgres", password="9867335172$Ss", database="Bizcard", port="5432")
     cursor = mydb.cursor()
@@ -196,15 +212,18 @@ elif selected == "Delete":
             mydb.commit()
             st.success("Deleted Successfully")
 
-           
+
+# --------------------------------------   /   Contact Page  /   --------------------------------------- #
+ 
+
 elif selected=="Contact Us":
-    st.title("*:green[Welcome to Dhanraj's BizCardX] :sunglasses:*")
+    st.title("*:green[Welcome to Dhanraj's BizCardX]*")
     st.title("Contact Us")
         
     coll1, coll2 = st.columns(2)
 
     with coll1: 
-        st.subheader('Dhanraj Shetty:sunglasses:')
+        st.subheader('Dhanraj Shetty:')
         st.caption('Mobile:- 9867335173')
         st.caption('E-Mail - sounushetty56@gmail.com')
         st.caption('GITHUB: https://github.com/DhanrajShetty56')
