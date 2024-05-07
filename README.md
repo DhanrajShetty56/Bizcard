@@ -30,7 +30,7 @@
 
 - Install the required libraries using the pip install command. Streamlit, mysql.connector, pandas, easyocr.
    
-- Execute the **“BizCardX_main.py”** using the streamlit run command.
+- Execute the **“bizcard.py”** using the streamlit run command.
 
       streamlit run bizcard.py
 
